@@ -63,38 +63,39 @@ abstract class PointCP5
   
   public abstract double getTheta();
   
+  public char getType(){
+    return typeCoord;
+  }
+
+  public void setType(char type){
+    typeCoord = type;
+  }
+
+  public double getxOrRho(){
+    return xOrRho;
+  }
+
+  public void setxOrRho(double x){
+    xOrRho = x;
+  }
+
+  public void setyOrTheta(double y){
+    yOrTheta = y;
+  }
+
+  public double getyOrTheta(){
+    return yOrTheta;
+  }
 	
   /**
    * Converts Cartesian coordinates to Polar coordinates.
    */
-  public void convertStorageToPolar()
-  {
-    if(typeCoord != 'P')
-    {
-      //Calculate RHO and THETA
-      double temp = getRho();
-      yOrTheta = getTheta();
-      xOrRho = temp;
-      
-      typeCoord = 'P';  //Change coord type identifier
-    }
-  }
+  public abstract void convertStorageToPolar();
 	
   /**
    * Converts Polar coordinates to Cartesian coordinates.
    */
-  public void convertStorageToCartesian()
-  {
-    if(typeCoord != 'C')
-    {
-      //Calculate X and Y
-      double temp = getX();
-      yOrTheta = getY();
-      xOrRho = temp;
-   
-      typeCoord = 'C';	//Change coord type identifier
-    }
-  }
+  public abstract void convertStorageToCartesian();
 
   /**
    * Calculates the distance in between two points using the Pythagorean

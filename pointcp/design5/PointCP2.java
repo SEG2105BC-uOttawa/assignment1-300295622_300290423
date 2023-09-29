@@ -22,13 +22,13 @@ public class PointCP2 extends PointCP5
    * Contains the current value of X or RHO depending on the type
    * of coordinates.
    */
-  private double xOrRho;
+  //private double xOrRho;
   
   /**
    * Contains the current value of Y or THETA value depending on the
    * type of coordinates.
    */
-  private double yOrTheta;
+  //private double yOrTheta;
 	
   
   //Constructors ******************************************************
@@ -47,22 +47,77 @@ public class PointCP2 extends PointCP5
  
   public double getX()
   {
-    return (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
+    if (getType() == 'C'){
+      return getxOrRho();
+    }
+    else{
+      return (Math.cos(Math.toRadians(getyOrTheta())) * getxOrRho());
+    }
+    
   }
   
   public double getY()
   {
-    return (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
+    if (getType() == 'C'){
+      return getyOrTheta();
+    }
+    else{
+      return (Math.sin(Math.toRadians(getyOrTheta())) * getxOrRho());
+    }
+    
   }
   
   public double getRho()
   {
-    return xOrRho;
+    if (getType() == 'P'){
+       return getxOrRho();
+    }
+    else{
+      return (Math.sqrt(Math.pow(getxOrRho(), 2) + Math.pow(getyOrTheta(), 2)));
+    }
+   
   }
   
   public double getTheta()
   {
-    return yOrTheta;
+    if (getType() == 'P'){
+      return getyOrTheta();
+    }
+    else{
+      return Math.toDegrees(Math.atan2(getyOrTheta(), getxOrRho()));
+    } 
+  }
+
+  /**
+   * Converts Cartesian coordinates to Polar coordinates.
+   */
+  public void convertStorageToPolar()
+  {
+    if(getType() != 'P')
+    {
+      //Calculate RHO and THETA
+      double temp = getRho();
+      setyOrTheta(getTheta());
+      setxOrRho(temp);
+      
+      setType('P'); //Change coord type identifier
+    }
+  }
+
+  /**
+   * Converts Polar coordinates to Cartesian coordinates.
+   */
+  public void convertStorageToCartesian()
+  {
+    if(getType() != 'C')
+    {
+      //Calculate X and Y
+      double temp = getX();
+      setyOrTheta(getY());
+      setxOrRho(temp);
+   
+      setType('C');	//Change coord type identifier
+    }
   }
 
   /**

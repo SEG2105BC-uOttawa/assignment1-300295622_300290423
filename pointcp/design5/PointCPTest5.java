@@ -35,7 +35,7 @@ public class PointCPTest5
    */
   public static void main(String[] args)
   {
-    PointCP2 point;
+    PointCP3 point;
 
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
 
@@ -44,7 +44,7 @@ public class PointCPTest5
     // If he did not, prompt the user for them.
     try
     {
-      point = new PointCP2(args[0].toUpperCase().charAt(0), 
+      point = new PointCP3(args[0].toUpperCase().charAt(0), 
         Double.valueOf(args[1]).doubleValue(), 
         Double.valueOf(args[2]).doubleValue());
     }
@@ -82,7 +82,7 @@ public class PointCPTest5
    * @throws IOException If there is an error getting input from
    *         the user.
    */
-  private static PointCP2 getInput() throws IOException
+  private static PointCP3 getInput() throws IOException
   {
     byte[] buffer = new byte[1024];  //Buffer to hold byte input
     boolean isOK = false;  // Flag set if input correct
@@ -160,7 +160,7 @@ public class PointCPTest5
       isOK = false;
     }
     //Return a new PointCP object
-    return (new PointCP2(coordType, a, b));
+    return (new PointCP3(coordType, a, b));
   }
 }
 
