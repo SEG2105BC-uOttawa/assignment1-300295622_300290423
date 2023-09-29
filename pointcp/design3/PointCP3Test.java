@@ -69,7 +69,7 @@ public class PointCP3Test
     point.convertStorageToCartesian();
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
     point.convertStorageToPolar();
-    System.out.println("\nAfter asking to store as Polar:\n" + point);
+    System.out.println("\nAfter converting Cartesian to Polar:\n" + point);
   }
 
   /**
@@ -94,24 +94,17 @@ public class PointCP3Test
     double b = 0.0;
 
     // Allow the user to enter the three different arguments
-    for (int i = 0; i < 3; i++)
+    for (int i = 1; i < 3; i++)
     {
       while (!(isOK))
       {
         isOK = true;  //flag set to true assuming input will be valid
-          
-        // Prompt the user
-        if (i == 0) // First argument - type of coordinates
         {
-          System.out.print("Enter the type of Coordinates you "
-            + "are inputting ((C)artesian / (P)olar): ");
-        }
-        else // Second and third arguments
-        {
+          System.out.println("Using Cartesian coordinates: ");
           System.out.print("Enter the value of " 
             + (coordType == 'C' 
               ? (i == 1 ? "X " : "Y ")
-              : (i == 1 ? "Rho " : "Theta ")) 
+              : (i == 1 ? "X " : "Y ")) 
             + "using a decimal point(.): ");
         }
 
@@ -127,20 +120,6 @@ public class PointCP3Test
         // Verify the user's input
         try
         {
-          if (i == 0) // First argument -- type of coordinates
-          {
-            if (!((theInput.toUpperCase().charAt(0) == 'C') 
-              || (theInput.toUpperCase().charAt(0) == 'P')))
-            {
-              //Invalid input, reset flag so user is prompted again
-              isOK = false;
-            }
-            else
-            {
-              coordType = theInput.toUpperCase().charAt(0);
-            }
-          }
-          else  // Second and third arguments
           {
             //Convert the input to double values
             if (i == 1)

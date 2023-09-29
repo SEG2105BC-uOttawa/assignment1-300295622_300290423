@@ -22,7 +22,7 @@ public class PointCP3
    * Contains C(artesian) or P(olar) to identify the type of
    * coordinates that are being dealt with.
    */
-  private char typeCoord;
+  private char typeCoord='C';
   
   /**
    * Contains the current value of X or RHO depending on the type
@@ -44,8 +44,8 @@ public class PointCP3
    */
   public PointCP3(char type, double xOrRho, double yOrTheta)
   {
-    if(type != 'C' && type != 'P')
-      throw new IllegalArgumentException();
+    //if(type != 'C' && type != 'P')
+      //throw new IllegalArgumentException();
     this.xOrRho = xOrRho;
     this.yOrTheta = yOrTheta;
     typeCoord = 'C';
@@ -57,33 +57,33 @@ public class PointCP3
  
   public double getX()
   {
-    if(typeCoord == 'C') 
+    //if(typeCoord == 'C') 
       return xOrRho;
-    else 
-      return (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
+    //else 
+      //return (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
   }
   
   public double getY()
   {
-    if(typeCoord == 'C') 
+    //if(typeCoord == 'C') 
       return yOrTheta;
-    else 
-      return (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
+    //else 
+      //return (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
   }
   
   public double getRho()
   {
-    if(typeCoord == 'P') 
-      return xOrRho;
-    else 
+    //if(typeCoord == 'P') 
+      //return xOrRho;
+    //else 
       return (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
   }
   
   public double getTheta()
   {
-    if(typeCoord == 'P')
-      return yOrTheta;
-    else 
+    //if(typeCoord == 'P')
+      //return yOrTheta;
+    //else 
       return Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
   }
   
@@ -100,7 +100,7 @@ public class PointCP3
       yOrTheta = getTheta();
       xOrRho = temp;
       
-      typeCoord = 'P';  //Change coord type identifier
+      //typeCoord = 'P';  //Change coord type identifier
     }
   }
 	
