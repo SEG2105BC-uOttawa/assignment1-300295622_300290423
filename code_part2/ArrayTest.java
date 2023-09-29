@@ -3,41 +3,95 @@ package code_part2;
 import java.util.*;
 
 public class ArrayTest {
-    
 
-    //Array Size = 600,000,000
-
-    public static int ArrayListCreate(){
-        ArrayList<String> arr = new ArrayList<String>();
-        long startTime = System.nanoTime();
-        long afterTime = 0;
-        long time = afterTime - startTime;
-        long timeSec = 0;
-        while (timeSec < 10){
-            arr.add("1");
-            afterTime = System.nanoTime();
-            time = afterTime - startTime;
-            timeSec = time/(10*10*10*10*10*10*10*10*10);
+    public static ArrayList<Integer> ArrayListCreate(int size){
+        Random randomNumber = new Random();
+        ArrayList<Integer> arrList = new ArrayList<Integer>();
+        for (int i=0; i<size; i++){
+            arrList.add(randomNumber.nextInt(9));
         }
-        int x = arr.size();
-        return x;
+        return arrList;
+    }
+
+    public static Vector<Integer> VectorCreate(int size){
+        Random randomNumber = new Random();
+        Vector<Integer> vector = new Vector<Integer>();
+        for (int i=0; i<size; i++){
+            vector.add(randomNumber.nextInt(9));
+        }
+        return vector;
+    }
+
+    public static int[] ArrayCreate(int size){
+        Random randomNumber = new Random();
+        int[] arr = new int[size];
+        for (int i=0; i<size; i++){
+            arr[i]= randomNumber.nextInt(9);
+        }
+        return arr;
+    }
+
+    public static int ArrayListSum(ArrayList<Integer> arrList){
+        Iterator<Integer> iterator = arrList.iterator();
+        int sum = 0;
+        while (iterator.hasNext()){
+            int value = iterator.next();
+            sum = sum + value;
+        }
+        return sum;
+    }
+
+    public static int VectorSum(Vector<Integer> vector){
+        Iterator<Integer> iterator = vector.iterator();
+        int sum = 0;
+        while (iterator.hasNext()){
+            int value = iterator.next();
+            sum = sum + value;
+        }
+        return sum;
+    }
+
+    public static int ArraySum(int[] arr){
+        int sum = 0;
+        for(int i=0; i<arr.length; i++){
+            int value = arr[i];
+            sum = sum + value;
+        }
+        return sum;
     }
 
     public static void main(String[] args){
-        int avg = 0;
-        for (int i=0; i<10; i++){
-            int a = 0;
-            a = ArrayListCreate();
-            avg += a;
-            System.out.println("Sum at Run" + (i+1) + ": " + avg);
-            System.out.println("Average by Run " + (i+1) + ": " + avg/(i+1));
-            System.out.println("Run " + (i+1) +": " + a);
-        }
+        int size = 250000000;
 
-        
-        avg = avg/10;
-        System.out.println(avg);
-        
+        ArrayList<Integer> arrList = ArrayListCreate(size);
+
+        Vector<Integer> vector = VectorCreate(size);
+
+        int[] arr = ArrayCreate(size);
+
+        long arraylistStartTime = System.nanoTime();
+        int arraylistSum = ArrayListSum(arrList);
+        long arraylistEndTime = System.nanoTime();
+        long arraylistTime = arraylistEndTime - arraylistStartTime;
+        double arraylistTimeinSeconds = ((double) arraylistTime)/(10*10*10*10*10*10*10*10*10);
+        System.out.println("Array List Sum: " + arraylistSum);
+        System.out.println("Array List Sum Time with 250,000,000 elements: " + arraylistTimeinSeconds);
+
+        long vectorStartTime = System.nanoTime();
+        int vectorSum = VectorSum(vector);
+        long vectorEndTime = System.nanoTime();
+        long vectorTime = vectorEndTime - vectorStartTime;
+        double vectorTimeinSeconds = ((double) vectorTime)/(10*10*10*10*10*10*10*10*10);
+        System.out.println("Vector Sum: " + vectorSum);
+        System.out.println("Vector Sum Time with 250,000,000 elements: " + vectorTimeinSeconds);
+
+        long arrayStartTime = System.nanoTime();
+        int arraySum = ArraySum(arr);
+        long arrayEndTime = System.nanoTime();
+        long arrayTime = arrayEndTime - arrayStartTime;
+        double arrayTimeinSeconds = ((double) arrayTime)/(10*10*10*10*10*10*10*10*10);
+        System.out.println("Array Sum: " + arraySum);
+        System.out.println("Array Sum Time with 250,000,000 elements: " + arrayTimeinSeconds);
     }
 
 
