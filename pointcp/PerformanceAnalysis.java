@@ -6,7 +6,7 @@ public class PerformanceAnalysis {
     public static void main(String[] args){
         Random random = new Random();
         //number of times we test our methods
-        int numberOfInstances = 101;
+        int numberOfInstances = 11001;
         //array holding performance times for each instance
         long[] performanceTimes = new long[numberOfInstances];
         //array with randomly generated coordinates for x and y
