@@ -7,8 +7,6 @@ public class PerformanceAnalysis {
         Random random = new Random();
         //number of times we test our methods
         int numberOfInstances = 11001;
-        //array holding performance times for each instance
-        long[] performanceTimes = new long[numberOfInstances];
         //array with randomly generated coordinates for x and y
         double[][] randomCoordinates = new double[2][numberOfInstances];
         //array with randomly generated C or P coordinate types
@@ -28,6 +26,7 @@ public class PerformanceAnalysis {
             randomCoordinates[0][j]=randomX;
             randomCoordinates[1][j]=randomY;
 
+        }
             //start timer
             long start = System.nanoTime();
             /*INSERT BODY CODE HERE */
@@ -37,15 +36,7 @@ public class PerformanceAnalysis {
             long finish = System.nanoTime();
             //time elapsed found + stored
             long timeElapsed = (finish-start);
-            performanceTimes[j]=timeElapsed;
-        }
         //finding max, min and sorting the array
-        long maxTime = Arrays.stream(performanceTimes).max().getAsLong();
-        long minTime = Arrays.stream(performanceTimes).min().getAsLong();
-        Arrays.sort(performanceTimes);
-
-        System.out.println(Arrays.toString(performanceTimes));
-        System.out.println("After running " + numberOfInstances + " tests:\n"+ "The median time is: "+ performanceTimes[numberOfInstances/2] 
-        +"\n The max time is: "+maxTime + "\n The min time is: "+minTime);              
+       System.out.println("Time Elapsed: "+ timeElapsed);            
     }
 }

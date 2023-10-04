@@ -60,9 +60,8 @@ public class PointCP3TestPerformance
             }
             randomCoordinates[0][j]=randomX;
             randomCoordinates[1][j]=randomY;
-
-            //start timer
-            long start = System.nanoTime();
+          }
+       
     PointCP3 point;
 
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
@@ -70,6 +69,8 @@ public class PointCP3TestPerformance
     // Check if the user input coordinates from the command line
     // If he did, create the PointCP object from these arguments.
     // If he did not, prompt the user for them.
+    long start = System.nanoTime();
+    for(int j=0; j<numberOfInstances; j++){
     try
     {
         point = new PointCP3(randomTypes[j],randomCoordinates[0][j],randomCoordinates[1][j]);
@@ -96,23 +97,15 @@ public class PointCP3TestPerformance
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
     point.convertStorageToPolar();
     System.out.println("\nAfter converting Cartesian to Polar:\n" + point);
-
-     //end timer
-     long finish = System.nanoTime();
-     //time elapsed found + stored
-     long timeElapsed = (finish-start)/1000000;
-     performanceTimes[j]=timeElapsed;
- }
-    //finding max, min and sorting the array
-    long maxTime = Arrays.stream(performanceTimes).max().getAsLong();
-    long minTime = Arrays.stream(performanceTimes).min().getAsLong();
-    Arrays.sort(performanceTimes);
-
-    System.out.println(Arrays.toString(performanceTimes));
-    System.out.println("After running " + numberOfInstances + " tests:\n"+ "The median time is: "+ performanceTimes[numberOfInstances/2] 
-    +"\n The max time is: "+maxTime + "\n The min time is: "+minTime);              
+  }
+   //end timer
+   long finish = System.nanoTime();
+   //time elapsed found + stored
+   long timeElapsed = (finish-start)/1000000;
+//finding max, min and sorting the array
+System.out.println("Time Elapsed: "+ timeElapsed);                
     }
-
+  
   /**
    * This method obtains input from the user and verifies that
    * it is valid.  When the input is valid, it returns a PointCP

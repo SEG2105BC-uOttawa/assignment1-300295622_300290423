@@ -6,6 +6,7 @@ public class PointCP5TestPerformance
 {
   public static void main(String[] args){
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
+    int timeCount = 0;
     Random random = new Random();
         //number of times we test our methods
         int numberOfInstances = 11001;
@@ -162,16 +163,10 @@ try{
             long finish = System.nanoTime();
             //time elapsed found + stored
             long timeElapsed = (finish-start)/1000000;
+            timeCount+=timeElapsed;
             performanceTimes[j]=timeElapsed;
         }
-        //finding max, min and sorting the array
-        long maxTime = Arrays.stream(performanceTimes).max().getAsLong();
-        long minTime = Arrays.stream(performanceTimes).min().getAsLong();
-        Arrays.sort(performanceTimes);
-
-        System.out.println(Arrays.toString(performanceTimes));
-        System.out.println("After running " + numberOfInstances + " tests:\n"+ "The median time is: "+ performanceTimes[numberOfInstances/2] 
-        +"\n The max time is: "+maxTime + "\n The min time is: "+minTime);              
+       System.out.println("TIME ELAPSED: "+timeCount);
     }}
 
 
