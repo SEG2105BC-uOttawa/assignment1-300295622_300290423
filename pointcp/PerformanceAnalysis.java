@@ -36,7 +36,7 @@ public class PerformanceAnalysis {
             //end timer
             long finish = System.currentTimeMillis();
             //time elapsed found + stored
-            long timeElapsed = (finish-start)/1000;
+            long timeElapsed = (finish-start);
             performanceTimes[i]=timeElapsed;
         }
         //finding max, min and sorting the array
