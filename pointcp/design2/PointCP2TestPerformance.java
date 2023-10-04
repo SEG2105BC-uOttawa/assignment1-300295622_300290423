@@ -38,31 +38,31 @@ public class PointCP2TestPerformance
   public static void main(String[] args)
   {
     Random random = new Random();
-        //number of times we test our methods
-        int numberOfInstances = 11001;
-        //array holding performance times for each instance
-        long[] performanceTimes = new long[numberOfInstances];
-        //array with randomly generated coordinates for x and y
-        double[][] randomCoordinates = new double[2][numberOfInstances];
-        //array with randomly generated C or P coordinate types
-        char[] randomTypes = new char[numberOfInstances];
+    //number of times we test our methods
+    int numberOfInstances = 11001;
+    //array holding performance times for each instance
+    long[] performanceTimes = new long[numberOfInstances];
+    //array with randomly generated coordinates for x and y
+    double[][] randomCoordinates = new double[2][numberOfInstances];
+    //array with randomly generated C or P coordinate types
+    char[] randomTypes = new char[numberOfInstances];
 
-        for(int i=0; i<numberOfInstances; i++){
-            boolean randomType = random.nextBoolean();
-            double randomX = random.nextDouble();
-            double randomY = random.nextDouble();
+    for(int j=0; j<numberOfInstances; j++){
+        boolean randomType = random.nextBoolean();
+        double randomX = random.nextDouble();
+        double randomY = random.nextDouble();
 
-            //setting random test values for the designs
-            if(randomType==true){
-                randomTypes[i]='C';
-            }else{
-                randomTypes[i]='P';
-            }
-            randomCoordinates[0][i]=randomX;
-            randomCoordinates[1][i]=randomY;
+        //setting random test values for the designs
+        if(randomType==true){
+            randomTypes[j]='C';
+        }else{
+            randomTypes[j]='P';
+        }
+        randomCoordinates[0][j]=randomX;
+        randomCoordinates[1][j]=randomY;
 
-            //start timer
-            long start = System.currentTimeMillis();
+        //start timer
+        long start = System.nanoTime();
     PointCP2 point;
 
     System.out.println("Cartesian-Polar Coordinates Conversion Program");
@@ -72,7 +72,7 @@ public class PointCP2TestPerformance
     // If he did not, prompt the user for them.
     try
     {
-      point = new PointCP2(randomTypes[i],randomCoordinates[0][i],randomCoordinates[1][i]);
+      point = new PointCP2(randomTypes[j],randomCoordinates[0][j],randomCoordinates[1][j]);
     }
     catch(Exception e)
     {
@@ -96,20 +96,21 @@ public class PointCP2TestPerformance
     System.out.println("\nAfter asking to store as Cartesian:\n" + point);
     point.convertStorageToPolar();
     System.out.println("\nAfter asking to store as Polar:\n" + point);
-      //end timer
-            long finish = System.currentTimeMillis();
-            //time elapsed found + stored
-            long timeElapsed = (finish-start);
-            performanceTimes[i]=timeElapsed;
-        }
-        //finding max, min and sorting the array
-        long maxTime = Arrays.stream(performanceTimes).max().getAsLong();
-        long minTime = Arrays.stream(performanceTimes).min().getAsLong();
-        Arrays.sort(performanceTimes);
-        System.out.println(Arrays.toString(performanceTimes));
-        System.out.println("After running " + numberOfInstances + " tests:\n"+ "The median time is: "+ performanceTimes[numberOfInstances/2] 
-        +"\n The max time is: "+maxTime + "\n The min time is: "+minTime);              
-  }
+       //end timer
+       long finish = System.nanoTime();
+       //time elapsed found + stored
+       long timeElapsed = (finish-start)/1000000;
+       performanceTimes[j]=timeElapsed;
+   }
+   //finding max, min and sorting the array
+   long maxTime = Arrays.stream(performanceTimes).max().getAsLong();
+   long minTime = Arrays.stream(performanceTimes).min().getAsLong();
+   Arrays.sort(performanceTimes);
+
+   System.out.println(Arrays.toString(performanceTimes));
+   System.out.println("After running " + numberOfInstances + " tests:\n"+ "The median time is: "+ performanceTimes[numberOfInstances/2] 
+   +"\n The max time is: "+maxTime + "\n The min time is: "+minTime);              
+}
 
   /**
    * This method obtains input from the user and verifies that
